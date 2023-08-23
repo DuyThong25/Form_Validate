@@ -32,7 +32,9 @@
   </li>
   
 </ul>
-  ** Lưu ý:
+<h3>** Lưu ý:</h3>
+
+  <ul>
     <li>Các thẻ input phải được đặt id </li>
     <li>Đối với 'radio' và 'checkbox' thì cần phải có name và rule phải được đặt trong từng thẻ input <br>
       VD: <br>
@@ -41,3 +43,4 @@
             input type="radio" name="gender"  value="other" rules="required" </li> 
     <li>Đối với 'radio' và 'checkbox' thì chức năng custom message chưa được tối ưu hóa, nếu muốn custom message thì phải đặt dấu ',' vào tất cả rules trong thẻ input
 </li>
+  </ul>
