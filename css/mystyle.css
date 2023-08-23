@@ -130,7 +130,7 @@
   }
   
   .input-with-icon input {
-    padding-right: 50px; /* Để tạo khoảng trống cho biểu tượng */
+    padding-right: 65px; /* Để tạo khoảng trống cho biểu tượng */
   }
   
   .input-with-icon i {
@@ -142,3 +142,8 @@
     transform: translateY(-50%);
     cursor: pointer;
   }
+  /* remove hide pass of type = password  */
+    input[type=password]::-ms-reveal,
+    input[type=password]::-ms-clear {
+      display: none;
+    }
