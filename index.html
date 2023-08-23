@@ -14,39 +14,40 @@
 
         <form action="" method="POST" class="form" id="form-1">
           <h3 class="heading">Thành viên đăng ký</h3>
-          <p class="desc">Cùng nhau học lập trình miễn phí tại F8 ❤️</p>
+          <p class="desc">Chào mừng bạnn</p>
       
           <div class="spacer"></div>
       
           <div class="form-group">
             <label for="fullname" class="form-label">Tên đầy đủ</label>
-            <input id="fullname" name="fullname" type="text" placeholder="VD: Sơn Đặng" class="form-control">
+            <input id="fullname" name="fullname" rules="required" type="text" placeholder="VD: Đặng Duy Thông" class="form-control">
             <span class="form-message"></span>
           </div>
       
           <div class="form-group">
             <label for="email" class="form-label">Email</label>
-            <input id="email" name="email" type="text" placeholder="VD: email@domain.com" class="form-control">
+            <input id="email" name="email" rules="required|email,'Vui lòng không để trống email'" type="text" placeholder="VD: email@domain.com" class="form-control">
             <span class="form-message"></span>
           </div>
       
           <div class="form-group">
             <label for="password" class="form-label">Mật khẩu</label>
             <div class="input-with-icon">
-              <input id="password" name="password" type="text" placeholder="Nhập mật khẩu" class="form-control">
+              <input id="password" name="password" rules="required|min:6,'Vui lòng nhập tối thiểu 6 ký tự'" type="password" placeholder="Nhập mật khẩu" class="form-control">
               <i id="icon__toggle" class="fa-regular fa-eye"></i>
             </div>
             <span class="form-message"></span>
           </div>
+          
           <div class="form-group">
             <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-            <input id="password_confirmation" name="password_confirmation" type="password" placeholder="Nhập lại mật khẩu" class="form-control">
+            <input id="password_confirmation" name="password_confirmation" rules="required|confirmed:#password,'Mật khẩu không trùng khớp'" type="password" placeholder="Nhập lại mật khẩu" class="form-control">
             <span class="form-message"></span>
           </div>
 
           <div class="form-group">
             <label for="Faculty " class="form-label">Ngành học</label>
-              <select name="Faculty" id="Faculty" class="form-control">
+              <select name="Faculty" id="Faculty" class="form-control" rules="required">
                 <option value=''>-- Chọn ngành học --</option>
                 <option value="Software technology">Công nghệ phần mềm</option>
                 <option value="Network security">An ninh mạng</option>
@@ -60,15 +61,15 @@
           <label for="gender" class="form-label">Giới tính</label>
           <div class="form-horizontal">
             <div>
-              <input type="radio" name="gender" value="Male">
+              <input type="radio" name="gender" value="Male" rules="required"> 
               <label>Nam</label>
             </div>
             <div>
-              <input type="radio" name="gender"  value="Female"> 
+              <input type="radio" name="gender"  value="Female" rules="required"> 
               <label>Nữ</label>
             </div>
             <div>
-              <input type="radio" name="gender"  value="other"> 
+              <input type="radio" name="gender"  value="other" rules="required"> 
               <label>khác</label>
             </div>
           </div>
@@ -79,15 +80,15 @@
           <label for="interest" class="form-label">Sở thích</label>
           <div class="form-horizontal">
             <div>
-              <input type="checkbox" name="interest" value="Soccer">
+              <input type="checkbox" name="interest" value="Soccer" rules="required">
               <label>Đá banh</label>
             </div>
             <div>
-              <input type="checkbox" name="interest"  value="Basketball"> 
+              <input type="checkbox" name="interest"  value="Basketball" rules="required"> 
               <label>Bóng rổ</label>
             </div>
             <div>
-              <input type="checkbox" name="interest"  value="other"> 
+              <input type="checkbox" name="interest"  value="other" rules="required"> 
               <label>khác</label>
             </div>
           </div>
@@ -96,7 +97,7 @@
 
         <div class="form-group">
           <label for="avatar" class="form-label">Chọn ảnh</label>
-          <input id="avatar" name="avatar" type="file" class="form-control">
+          <input id="avatar" name="avatar" type="file" class="form-control" rules="required">
           <span class="form-message"></span>
         </div>
 
@@ -106,45 +107,24 @@
       </div>
 
 
-    <script src="js/validator.js"></script>
+    <script src="js/validate.js"></script>
     <script>
-      Validator ({
-        form: '#form-1',
-        formGroup: '.form-group',
-        errorMessage: '.form-message',
-        rules: [
-          Validator.isRequired(`#fullname`, "Vui lòng không để trống tên"),
-          Validator.isRequired(`#password_confirmation`),
-          Validator.isRequired(`#email`),
-          Validator.isRequired(`#password`),
-          Validator.isRequired(`input[name=gender]`),
-          Validator.isRequired(`input[name=interest]`),
-          Validator.isRequired(`#Faculty`),
-          Validator.isRequired(`#avatar`),
+     // Xử lý form
+     let form = new Validator('#form-1');
+
+     form.submitForm = function(data) {
+        console.log(data);
+     }
 
 
-          Validator.isEmail(`#email`),
-          Validator.minLength('#password', 2),
-          Validator.isConfirmed(`#password_confirmation`, function() {
-            return `#form-1 #password`;
-          }, 'Mật khẩu không trùng khớp'),
 
-        ],
-        submitForm: function (data) {
-            console.log(data);
-        }
-      })
+     //Custom hide/unhide password
 
-      // Custom option 
-      const selectElement = document.getElementById("Faculty");
-      selectElement.style.textAlign = "center";
-      //Custom hide/unhide password
-
-        const toggleIcon = document.querySelector('#icon__toggle');
+     const toggleIcon = document.querySelector('#icon__toggle');
         const passwordInput = document.querySelector('#password');
 
           toggleIcon.addEventListener('click', function () {
-            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = passwordInput.type === 'text' ? 'password' : 'text';
 
             toggleIcon.classList.toggle('fa-eye');
             toggleIcon.classList.toggle('fa-eye-slash');
